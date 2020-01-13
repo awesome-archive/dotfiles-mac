@@ -14,6 +14,7 @@ binaries=(
   dep
   homebrew/core/php
 
+  graphviz
   dos2unix
   wget
   ctags
@@ -21,6 +22,9 @@ binaries=(
   ccat
   git-flow
   tree
+  telnet
+  pass
+  gnupg
   gpg
   mackup
   z
@@ -42,12 +46,20 @@ binaries=(
   pstree
   privoxy
   textql
-  kafka
+  libconfig
+  glog
+  librdkafka
+  apache-arrow
+  protobuf
+  # 需要 java8
+  adoptopenjdk/openjdk/adoptopenjdk8
+  # kafka
   # 数据库
   mysql
   nmap
+  zmap
   imagemagick
-  # composer
+  composer
   wrk
   automake
   autoconf
@@ -64,6 +76,7 @@ binaries=(
   gmp
   libevent
   maven
+  apache-flink
   zlib
   # homebrew/nginx was deprecated. This tap is now empty as all its formulae were migrated.
   # homebrew/nginx/openresty
@@ -73,11 +86,12 @@ binaries=(
   #automake 
   berkeley-db4 
   #libtool 
-  boost --c++11 
+  #flutter
+  boost 
   miniupnpc 
   #openssl 
   pkg-config 
-  protobuf --c++11 
+  protobuf 
   qt5 
   #libevent
   librsvg
@@ -87,7 +101,8 @@ binaries=(
   hiredis
   consul-template
   # CI / CD
-  jenkins
+  # 需要 java8
+  # jenkins
   # jenkins-x/jx/jx
   kubernetes-helm
   # mysql
@@ -96,6 +111,7 @@ binaries=(
   # hub
   # legit
   # ssh-copy-id
+  cocoapods
 )
 
 # Apps
@@ -105,12 +121,17 @@ apps=(
   # browsers
   google-chrome
   firefox
-  
+  # ide
+  android-studio
+  pycharm-ce
+  intellij-idea 
+  # term
   iterm2 # 加强版终端
+  # the rar
   the-unarchiver
   # note
   evernote
-  #workflowy-beta
+  # workflowy-beta
   boostnote
   # editor
   sublime-text
@@ -120,19 +141,18 @@ apps=(
   licecap # 录屏gif软件
   appcleaner # 卸载软件
   grandperspective # 磁盘空间分析软件
-  pycharm-ce
-  intellij-idea
+
   typora
   charles
   android-file-transfer
-  nutstore
+  nutstore # 坚果云
   docker
   minikube
   # password manager
   macpass
   1password
-  postman
   gpg-suite
+  postman
   wireshark
   neteasemusic
   ## work
@@ -142,7 +162,8 @@ apps=(
   virtualbox
   fork
   # database client
-  sequel-pro  #下载速度慢，需手动安装
+  homebrew/cask-versions/sequel-pro-nightly
+  # sequel-pro  # mysql8 或者 一些 奔溃原因
   robo-3t
   wechat
   # rdm
@@ -155,7 +176,7 @@ apps=(
   #
   # Apple store:
   # pocket
-  # 
+  # helm
   #####
   # 付费软件：
   # reeder3
@@ -180,10 +201,8 @@ brew install coreutils
 brew install findutils
 # Install Bash 4
 brew install bash
-# Install Homebrew Cask
-brew tap caskroom/cask
-brew tap caskroom/fonts
-brew tap caskroom/versions
+brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 
 brew tap ethereum/ethereum
 brew tap jenkins-x/jx
@@ -194,7 +213,7 @@ brew link --force libxml2
 echo "Installing binaries..."
 brew install ${binaries[@]}
 
-brew linkapps solidity
+# brew linkapps solidity
 
 echo "Installing fonts..."
 brew cask install ${fonts[@]}
@@ -206,6 +225,5 @@ brew cask install --appdir="/Applications" ${apps[@]}
 
 # clean things up
 brew cleanup
-brew cask cleanup
 
 exit 0
