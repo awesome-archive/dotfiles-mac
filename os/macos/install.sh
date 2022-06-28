@@ -7,13 +7,25 @@
 
 # Binaries
 binaries=(
-  # language
+  #### language
   python
-  # python@2
   go
   dep
   homebrew/core/php
+  node
+  svn
+  nvm
+  java
+  adoptopenjdk/openjdk/adoptopenjdk8 # brew install --build-from-source openjdk@8
+  #### database
+  mysql
+  # mongodb
+  #### security
+  sqlmap
+  nmap
+  zmap
 
+  graphviz
   dos2unix
   wget
   ctags
@@ -21,8 +33,13 @@ binaries=(
   ccat
   git-flow
   tree
+  telnet
+  pass
+  gnupg
   gpg
   mackup
+  libusb
+  mas
   z
   tmux
   htop
@@ -31,23 +48,22 @@ binaries=(
   pyenv
   gettext
   netcat
-  gdb
+  gdb # m1 芯片暂不支持
   gcc
-  # security
-  sqlmap
-  # Node
-  node@8
-  nvm
+  ninja
+  syncthing
   httpie
   pstree
   privoxy
   textql
-  kafka
-  # 数据库
-  mysql
-  nmap
+  libconfig
+  glog
+  librdkafka
+  apache-arrow
+  protobuf
+  # kafka
   imagemagick
-  # composer
+  composer
   wrk
   automake
   autoconf
@@ -63,99 +79,101 @@ binaries=(
   mcrypt
   gmp
   libevent
-  maven
-  zlib
-  # homebrew/nginx was deprecated. This tap is now empty as all its formulae were migrated.
-  # homebrew/nginx/openresty
+  cppcheck
   
+  maven
+  apache-flink
+  # apache-spark
+  hive
+  zlib
   solidity
-  #编译bitcoin
-  #automake 
-  berkeley-db4 
-  #libtool 
-  boost --c++11 
+  grpc
+  # automake 
+  berkeley-db@4 
+  # libtool 
+  # flutter
+  boost
+  rocksdb
   miniupnpc 
-  #openssl 
+  # openssl 
   pkg-config 
-  protobuf --c++11 
+  protobuf 
   qt5 
-  #libevent
+  # libevent
   librsvg
   tldr
-  # /usr/local/Cellar/php/7.2.5/bin/pecl install swoole
-  # /usr/local/Cellar/php/7.2.5/bin/pecl install xdebug
+  buf
   hiredis
   consul-template
   # CI / CD
-  jenkins
+  earthly
+  # jenkins
   # jenkins-x/jx/jx
-  kubernetes-helm
-  # mysql
+  helm
   # nginx
-  # mongodb
   # hub
   # legit
   # ssh-copy-id
+  cocoapods
+  # grin
 )
 
 # Apps
 apps=(
-  # language
-  java
-  # browsers
+  #### browsers
   google-chrome
   firefox
-  
+  #### ide
+  # android-studio
+  pycharm-ce
+  # intellij-idea 
   iterm2 # 加强版终端
-  the-unarchiver
-  # note
-  evernote
-  #workflowy-beta
+  #### note
+  yinxiangbiji
+  notion
+  # workflowy-beta
   boostnote
-  # editor
+  #### devops
+  docker
+  # minikube
+  #### editor
   sublime-text
   visual-studio-code
+  typora
+  #### password manager
+  macpass
+  # 1password
+  #### database client
+  # sequel-pro  # mysql8 或者 一些 奔溃原因
+  homebrew/cask-versions/sequel-pro-nightly
+  another-redis-desktop-manager
+  robo-3t
+  ##### other
+  the-unarchiver
+  mockoon
   ngrok
   xmind
   licecap # 录屏gif软件
   appcleaner # 卸载软件
   grandperspective # 磁盘空间分析软件
-  pycharm-ce
-  intellij-idea
-  typora
   charles
   android-file-transfer
   nutstore
-  docker
-  minikube
-  # password manager
-  macpass
-  1password
-  postman
+  # calibre
   gpg-suite
+  postman
   wireshark
   neteasemusic
-  ## work
-  bearychat
-  # slack
-  zoomus
-  virtualbox
   fork
-  # database client
-  sequel-pro  #下载速度慢，需手动安装
-  robo-3t
-  wechat
-  # rdm
+  # virtualbox # not support m1
   #####
   # 
   # 手动安装：
-  # shadowsocksx # shadowsocks
-  # shadowsocksx-ng
   # beyond-compare # 对比软件
   #
   # Apple store:
   # pocket
-  # 
+  # helm
   #####
   # 付费软件：
   # reeder3
@@ -180,13 +198,11 @@ brew install coreutils
 brew install findutils
 # Install Bash 4
 brew install bash
-# Install Homebrew Cask
-brew tap caskroom/cask
-brew tap caskroom/fonts
-brew tap caskroom/versions
+brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 
 brew tap ethereum/ethereum
-brew tap jenkins-x/jx
+brew tap bufbuild/buf
 
 brew link --force openssl
 brew link --force libxml2
@@ -194,18 +210,15 @@ brew link --force libxml2
 echo "Installing binaries..."
 brew install ${binaries[@]}
 
-brew linkapps solidity
-
 echo "Installing fonts..."
-brew cask install ${fonts[@]}
+brew install ${fonts[@]}
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "Installing apps..."
-brew cask install --appdir="/Applications" ${apps[@]}
+brew install --cask --appdir="/Applications" ${apps[@]}
 
 # clean things up
 brew cleanup
-brew cask cleanup
 
 exit 0

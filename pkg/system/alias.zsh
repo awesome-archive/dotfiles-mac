@@ -7,7 +7,8 @@ alias cls="clean"
 # python versions
 alias ve="pyenv local"
 alias rm="trash"
-alias g++="g++-4.8"
+# alias python="python3"
+#alias g++="g++-4.8"
 #alias gcc="gcc-4.8"
 # 
 # grc overides for ls
@@ -22,5 +23,5 @@ then
 fi
 
 # proxy
-alias proxyon="export http_proxy='http://127.0.0.1:8118'; export https_proxy=$http_proxy; export no_proxy='localhost,127.0.0.1,::1,192.168.99.0/24'"
+alias proxyon="export http_proxy='127.0.0.1:7890'; export https_proxy='127.0.0.1:7890'; export no_proxy='localhost,127.0.0.1,::1,192.168.99.0/24'"
 alias proxyoff="unset http_proxy; unset https_proxy; unset no_proxy;"
